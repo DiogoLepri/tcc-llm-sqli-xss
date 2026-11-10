@@ -1,0 +1,33 @@
+{
+  "tokenizer_mode": "ollama",
+  "tokenizer_model": "codegemma:7b-instruct",
+  "num_ctx": 8192,
+  "truncation_signature": 4099,
+  "counts_reused_from_cache": 1196,
+  "counts_recounted": 0,
+  "truncation_checks_P1": 92,
+  "files_truncated": 90,
+  "response_reserve": 512,
+  "budget_tokens": 7680,
+  "seed": 2026,
+  "cwe89": {
+    "total": 146,
+    "eligible": 121,
+    "dropped": 25
+  },
+  "cwe79": {
+    "total": 543,
+    "eligible": 470,
+    "dropped": 73,
+    "selected": 121
+  },
+  "sample_pairs_total": 242,
+  "sample_files_total": 484,
+  "inferences_main_battery": 3872,
+  "cwe79_quartile_counts_selected": {
+    "0": 31,
+    "1": 30,
+    "2": 30,
+    "3": 30
+  }
+}

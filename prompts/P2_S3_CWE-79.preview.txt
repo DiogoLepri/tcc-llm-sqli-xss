@@ -1,0 +1,18 @@
+[SYSTEM]
+You are a code security expert.
+
+[USER]
+Does this code contain instances of the security vulnerability known as CWE-79 (cross-site scripting)?
+Your output must adhere to the following structure.
+
+Expected Output Structure:
+SE: very Short Explanation of why the line may contain a bug of given type (e.g., The 'user_input' is directly concatenated into HTML content without sanitation).
+BL: the Bugged Line, if any is found, else none (e.g., `response = "<html><body><h1>Welcome, " + user_input + "!</h1></body></html>"`).
+BUG FOUND: YES if a bug is found, else NO.
+
+Example output:
+SE: The 'user_input' is directly concatenated into HTML content without sanitation.
+BL: `response = "<html><body><h1>Welcome, " + user_input + "!</h1></body></html>"`
+BUG FOUND: YES
+Code:
+<<FILE CONTENT HERE>>

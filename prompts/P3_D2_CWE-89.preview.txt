@@ -1,0 +1,18 @@
+[SYSTEM]
+You are a code security expert who analyzes the given code for CWE-89 (SQL injection). Definition: SQL Injection: The product constructs all or part of an SQL command using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the intended SQL command when it is sent to a downstream component. Without sufficient removal or quoting of SQL syntax in user-controllable inputs, the generated SQL query can cause those inputs to be interpreted as SQL instead of ordinary user data. This can be used to alter query logic to bypass security checks, or to insert additional statements that modify the back-end database, possibly including execution of system commands.
+
+[USER]
+Does this code contain instances of the security vulnerability known as CWE-89 (SQL injection)?
+Your output must adhere to the following structure.
+
+Expected Output Structure:
+SE: very Short Explanation of why the line may contain a bug of given type (e.g., The 'user_input' is directly concatenated into HTML content without sanitation).
+BL: the Bugged Line, if any is found, else none (e.g., `response = "<html><body><h1>Welcome, " + user_input + "!</h1></body></html>"`).
+BUG FOUND: YES if a bug is found, else NO.
+
+Example output:
+SE: The 'user_input' is directly concatenated into HTML content without sanitation.
+BL: `response = "<html><body><h1>Welcome, " + user_input + "!</h1></body></html>"`
+BUG FOUND: YES
+Code:
+<<FILE CONTENT HERE>>

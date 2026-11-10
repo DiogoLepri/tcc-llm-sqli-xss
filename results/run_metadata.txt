@@ -1,0 +1,64 @@
+inicio: 2026-10-27T12:31:47Z
+ollama: ollama version is 0.40.11
+hardware: Apple M4 Pro | RAM 24 GB
+macOS: 27.2
+modelos:
+codegemma:7b-instruct    0c96700aaada    5.0 GB    5 days ago    
+gemma:7b-instruct        a72c7f4d0a15    5.0 GB    5 days ago    
+--- gemma:7b-instruct
+  Model
+    architecture        gemma          
+    parameters          9B             
+    context length      8192           
+    embedding length    3072           
+    quantization        Q4_0           
+    template source     go_template    
+
+  Capabilities
+    completion    
+
+  Parameters
+    penalize_newline    false                
+    repeat_penalty      1                    
+    stop                "<start_of_turn>"    
+    stop                "<end_of_turn>"      
+
+  License
+    Gemma Terms of Use                  
+    Last modified: February 21, 2024    
+    ...                                 
+
+--- codegemma:7b-instruct
+  Model
+    architecture        gemma          
+    parameters          9B             
+    context length      8192           
+    embedding length    3072           
+    quantization        Q4_0           
+    template source     go_template    
+
+  Capabilities
+    completion    
+
+  Parameters
+    penalize_newline    false                
+    repeat_penalty      1                    
+    stop                "<start_of_turn>"    
+    stop                "<end_of_turn>"      
+
+  License
+    Gemma Terms of Use                  
+    Last modified: February 21, 2024    
+    ...                                 
+
+num_ctx=8192 seed=2026 temperature=0
+md5 (prompts e scripts):
+eb6c46777189ab6172653c822ee37259 prompts/prompt_config.json
+c6d48422fe050c28071b1591cba5d1c4 prompts/P0_original.txt
+c30e04935dda5bd166aac2e5623775a3 scripts/build_prompts.py
+534b41c01da0f1359d0c82f5e8b69525 scripts/build_sample.py
+10fb1d76ee1a71d048c41aee9dca6b1a scripts/build_stability.py
+db00d1ac250f5bcc8c9a201a8b44d658 scripts/metrics.py
+7e17544a1457124ce86ad3ba6ab679b2 scripts/parse_outputs.py
+20ed0d82b90c479eb4063be35e07ee73 scripts/run_inference.py
+dc0dae2f5871172e803aa08b856b8838 data/sample_manifest.csv

@@ -1,0 +1,62 @@
+{
+  "temperature": 0,
+  "seed": 2026,
+  "output_schema_native": "SE / BL / BUG FOUND (idêntico ao P0, nas 4 condições)",
+  "parsed_mapping": {
+    "BUG FOUND YES->verdict": "vulnerable",
+    "BUG FOUND NO->verdict": "safe",
+    "BL->reported_bug_line": "linha ou null",
+    "SE->explanation": "curta"
+  },
+  "cwe_ref_P0": {
+    "79": "Improper Neutralization of Input During Web Page Generation: Cross-site Scripting",
+    "89": "Improper Neutralization of Special Elements used in an SQL Command: SQL Injection"
+  },
+  "cwe_ref_P1P2P3": {
+    "79": "CWE-79 (cross-site scripting)",
+    "89": "CWE-89 (SQL injection)"
+  },
+  "sources": {
+    "P0": "Sovrano run_prompts.py (verbatim; single user msg; no system)",
+    "P1": "Apêndice A.2 (S1, task-oriented; system vazio)",
+    "P2": "Apêndice A.3 (S3, role-oriented)",
+    "P3": "Apêndice A.4 (D2, definition-based; role+definição MITRE no system)"
+  },
+  "adaptation_notes": [
+    "USER idêntico em P1/P2/P3 (ordem do Apêndice A: pergunta -> saída -> Code).",
+    "Condições variam SOMENTE o system (none/role/role+definição).",
+    "Instrução de saída JSON do rascunho substituída pelo bloco SE/BL/BUG FOUND do P0.",
+    "Sem chain-of-thought."
+  ],
+  "output_block": "Your output must adhere to the following structure.\n\nExpected Output Structure:\nSE: very Short Explanation of why the line may contain a bug of given type (e.g., The 'user_input' is directly concatenated into HTML content without sanitation).\nBL: the Bugged Line, if any is found, else none (e.g., `response = \"<html><body><h1>Welcome, \" + user_input + \"!</h1></body></html>\"`).\nBUG FOUND: YES if a bug is found, else NO.\n\nExample output:\nSE: The 'user_input' is directly concatenated into HTML content without sanitation.\nBL: `response = \"<html><body><h1>Welcome, \" + user_input + \"!</h1></body></html>\"`\nBUG FOUND: YES",
+  "prompts": {
+    "79": {
+      "P1_S1": {
+        "system": "",
+        "user": "Does this code contain instances of the security vulnerability known as CWE-79 (cross-site scripting)?\nYour output must adhere to the following structure.\n\nExpected Output Structure:\nSE: very Short Explanation of why the line may contain a bug of given type (e.g., The 'user_input' is directly concatenated into HTML content without sanitation).\nBL: the Bugged Line, if any is found, else none (e.g., `response = \"<html><body><h1>Welcome, \" + user_input + \"!</h1></body></html>\"`).\nBUG FOUND: YES if a bug is found, else NO.\n\nExample output:\nSE: The 'user_input' is directly concatenated into HTML content without sanitation.\nBL: `response = \"<html><body><h1>Welcome, \" + user_input + \"!</h1></body></html>\"`\nBUG FOUND: YES\nCode:\n{code}"
+      },
+      "P2_S3": {
+        "system": "You are a code security expert.",
+        "user": "Does this code contain instances of the security vulnerability known as CWE-79 (cross-site scripting)?\nYour output must adhere to the following structure.\n\nExpected Output Structure:\nSE: very Short Explanation of why the line may contain a bug of given type (e.g., The 'user_input' is directly concatenated into HTML content without sanitation).\nBL: the Bugged Line, if any is found, else none (e.g., `response = \"<html><body><h1>Welcome, \" + user_input + \"!</h1></body></html>\"`).\nBUG FOUND: YES if a bug is found, else NO.\n\nExample output:\nSE: The 'user_input' is directly concatenated into HTML content without sanitation.\nBL: `response = \"<html><body><h1>Welcome, \" + user_input + \"!</h1></body></html>\"`\nBUG FOUND: YES\nCode:\n{code}"
+      },
+      "P3_D2": {
+        "system": "You are a code security expert who analyzes the given code for CWE-79 (cross-site scripting). Definition: Cross-Site Scripting: The product does not neutralize or incorrectly neutralizes user-controllable input before it is placed in output that is used as a web page that is served to other users. Cross-site scripting (XSS) vulnerabilities occur when:\n1. Untrusted data enters a web application, typically from a web request.\n2. The web application dynamically generates a web page that contains this untrusted data.\n3. During page generation, the application does not prevent the data from containing content that is executable by a web browser, such as JavaScript, HTML tags, HTML attributes, mouse events, Flash, ActiveX, etc.\n4. A victim visits the generated web page through a web browser, which contains malicious script that was injected using the untrusted data.\n5. Since the script comes from a web page that was sent by the web server, the victim's web browser executes the malicious script in the context of the web server's domain.\n6. This effectively violates the intention of the web browser's same-origin policy, which states that scripts in one domain should not be able to access resources or run code in a different domain.",
+        "user": "Does this code contain instances of the security vulnerability known as CWE-79 (cross-site scripting)?\nYour output must adhere to the following structure.\n\nExpected Output Structure:\nSE: very Short Explanation of why the line may contain a bug of given type (e.g., The 'user_input' is directly concatenated into HTML content without sanitation).\nBL: the Bugged Line, if any is found, else none (e.g., `response = \"<html><body><h1>Welcome, \" + user_input + \"!</h1></body></html>\"`).\nBUG FOUND: YES if a bug is found, else NO.\n\nExample output:\nSE: The 'user_input' is directly concatenated into HTML content without sanitation.\nBL: `response = \"<html><body><h1>Welcome, \" + user_input + \"!</h1></body></html>\"`\nBUG FOUND: YES\nCode:\n{code}"
+      }
+    },
+    "89": {
+      "P1_S1": {
+        "system": "",
+        "user": "Does this code contain instances of the security vulnerability known as CWE-89 (SQL injection)?\nYour output must adhere to the following structure.\n\nExpected Output Structure:\nSE: very Short Explanation of why the line may contain a bug of given type (e.g., The 'user_input' is directly concatenated into HTML content without sanitation).\nBL: the Bugged Line, if any is found, else none (e.g., `response = \"<html><body><h1>Welcome, \" + user_input + \"!</h1></body></html>\"`).\nBUG FOUND: YES if a bug is found, else NO.\n\nExample output:\nSE: The 'user_input' is directly concatenated into HTML content without sanitation.\nBL: `response = \"<html><body><h1>Welcome, \" + user_input + \"!</h1></body></html>\"`\nBUG FOUND: YES\nCode:\n{code}"
+      },
+      "P2_S3": {
+        "system": "You are a code security expert.",
+        "user": "Does this code contain instances of the security vulnerability known as CWE-89 (SQL injection)?\nYour output must adhere to the following structure.\n\nExpected Output Structure:\nSE: very Short Explanation of why the line may contain a bug of given type (e.g., The 'user_input' is directly concatenated into HTML content without sanitation).\nBL: the Bugged Line, if any is found, else none (e.g., `response = \"<html><body><h1>Welcome, \" + user_input + \"!</h1></body></html>\"`).\nBUG FOUND: YES if a bug is found, else NO.\n\nExample output:\nSE: The 'user_input' is directly concatenated into HTML content without sanitation.\nBL: `response = \"<html><body><h1>Welcome, \" + user_input + \"!</h1></body></html>\"`\nBUG FOUND: YES\nCode:\n{code}"
+      },
+      "P3_D2": {
+        "system": "You are a code security expert who analyzes the given code for CWE-89 (SQL injection). Definition: SQL Injection: The product constructs all or part of an SQL command using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the intended SQL command when it is sent to a downstream component. Without sufficient removal or quoting of SQL syntax in user-controllable inputs, the generated SQL query can cause those inputs to be interpreted as SQL instead of ordinary user data. This can be used to alter query logic to bypass security checks, or to insert additional statements that modify the back-end database, possibly including execution of system commands.",
+        "user": "Does this code contain instances of the security vulnerability known as CWE-89 (SQL injection)?\nYour output must adhere to the following structure.\n\nExpected Output Structure:\nSE: very Short Explanation of why the line may contain a bug of given type (e.g., The 'user_input' is directly concatenated into HTML content without sanitation).\nBL: the Bugged Line, if any is found, else none (e.g., `response = \"<html><body><h1>Welcome, \" + user_input + \"!</h1></body></html>\"`).\nBUG FOUND: YES if a bug is found, else NO.\n\nExample output:\nSE: The 'user_input' is directly concatenated into HTML content without sanitation.\nBL: `response = \"<html><body><h1>Welcome, \" + user_input + \"!</h1></body></html>\"`\nBUG FOUND: YES\nCode:\n{code}"
+      }
+    }
+  }
+}
