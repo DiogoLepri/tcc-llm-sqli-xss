@@ -18,6 +18,19 @@ O trabalho tem duas etapas:
 
 120 arquivos por condição (60 vulneráveis e 60 corrigidos). Um classificador que responde sempre "vulnerável" teria F1 de 0,667 nesta amostra. O teste exato de McNemar não apontou diferença entre modelos nem entre prompts (p = 1,000 nas quatro comparações). Todos os números estão em `results/analysis60.json`.
 
+### Confirmação com a amostra completa
+
+A mesma análise, repetida sobre os 242 pares coletados (484 arquivos por condição), levou à mesma conclusão:
+
+| Modelo | Prompt | Acurácia | Precisão | Recall | F1 | FPR | Pares separados / invertidos |
+|---|---|---|---|---|---|---|---|
+| Gemma 7B | P0 | 0,498 | 0,499 | 0,822 | 0,621 | 0,826 | 8 / 9 |
+| Gemma 7B | P3 | 0,504 | 0,502 | 0,847 | 0,631 | 0,839 | 9 / 7 |
+| CodeGemma 7B | P0 | 0,502 | 0,501 | 0,901 | 0,644 | 0,897 | 2 / 1 |
+| CodeGemma 7B | P3 | 0,500 | 0,500 | 0,955 | 0,656 | 0,955 | 1 / 1 |
+
+O teste de McNemar também não apontou diferença (p ajustado = 1,000 nas quatro comparações). Os números estão em `results/analysis242.json`.
+
 ## Estrutura
 
 ```
@@ -48,6 +61,12 @@ python3 scripts/analyze60.py --root .
 ```
 
 O script sorteia os 60 pares (semente 2026, estratificados por quartil de tamanho, usando só o tamanho dos arquivos), lê `logs/main.jsonl`, calcula as métricas e o teste de McNemar e grava `results/analysis60.json`.
+
+Para a confirmação com os 242 pares coletados (não precisa do conjunto de dados do estudo-base):
+
+```bash
+python3 scripts/analyze242.py --root .
+```
 
 Para a reprodução do estudo-base:
 
