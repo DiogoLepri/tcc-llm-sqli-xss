@@ -5,38 +5,31 @@ Material do Trabalho de Conclusão de Curso de **Diogo Lepri Moreira** (Ciência
 O trabalho tem duas etapas:
 
 1. **Reprodução parcial** de Sovrano, Bauer e Bacchelli (2025): as métricas do artigo são recalculadas a partir das respostas publicadas pelos autores (48 valores, todos iguais aos reportados).
-2. **Nova execução**: Gemma 7B e CodeGemma 7B, rodando localmente no Ollama, classificam 60 pares de arquivos vulnerável/corrigido (30 de CWE-79 e 30 de CWE-89) com dois prompts, P0 (original do estudo-base) e P3 (papel de especialista + definição da CWE, adaptado do template D2 do SecLLMHolmes).
+2. **Nova execução**: Gemma 7B e CodeGemma 7B, rodando localmente no Ollama, classificam 242 pares de arquivos vulnerável/corrigido (121 de XSS e 121 de SQL Injection) com quatro prompts: P0 (original do estudo-base), P1 (pergunta do SecLLMHolmes), P2 (P1 + papel de especialista) e P3 (P2 + definição da falha).
 
 ## Resultado principal
 
-| Modelo | Prompt | Acurácia | Precisão | Recall | F1 | FPR | FN |
-|---|---|---|---|---|---|---|---|
-| Gemma 7B | P0 | 0,500 | 0,500 | 0,783 | 0,610 | 0,783 | 13 |
-| Gemma 7B | P3 | 0,500 | 0,500 | 0,850 | 0,630 | 0,850 | 9 |
-| CodeGemma 7B | P0 | 0,508 | 0,505 | 0,917 | 0,651 | 0,900 | 5 |
-| CodeGemma 7B | P3 | 0,508 | 0,504 | 0,967 | 0,663 | 0,950 | 2 |
+| Modelo | Prompt | VP | FN | FP | VN | Acurácia | Recall | F1 | Taxa de FP | Pares separados / invertidos |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Gemma 7B | P0 | 199 | 43 | 200 | 42 | 0,498 | 0,822 | 0,621 | 0,826 | 8 / 9 |
+| Gemma 7B | P1 | 184 | 57 | 189 | 52 | 0,490 | 0,763 | 0,599 | 0,784 | 13 / 18 |
+| Gemma 7B | P2 | 188 | 54 | 191 | 51 | 0,494 | 0,777 | 0,605 | 0,789 | 11 / 14 |
+| Gemma 7B | P3 | 205 | 37 | 203 | 39 | 0,504 | 0,847 | 0,631 | 0,839 | 9 / 7 |
+| CodeGemma 7B | P0 | 218 | 24 | 217 | 25 | 0,502 | 0,901 | 0,644 | 0,897 | 2 / 1 |
+| CodeGemma 7B | P1 | 220 | 22 | 222 | 20 | 0,496 | 0,909 | 0,643 | 0,917 | 3 / 5 |
+| CodeGemma 7B | P2 | 227 | 15 | 228 | 14 | 0,498 | 0,938 | 0,651 | 0,942 | 3 / 4 |
+| CodeGemma 7B | P3 | 231 | 11 | 231 | 11 | 0,500 | 0,955 | 0,656 | 0,955 | 1 / 1 |
 
-120 arquivos por condição (60 vulneráveis e 60 corrigidos). Um classificador que responde sempre "vulnerável" teria F1 de 0,667 nesta amostra. O teste exato de McNemar não apontou diferença entre modelos nem entre prompts (p = 1,000 nas quatro comparações). Todos os números estão em `results/analysis60.json`.
+484 arquivos por condição (242 vulneráveis e 242 corrigidos; 482 no Gemma 7B com P1, em que duas respostas não foram registradas). Um classificador que responde sempre "vulnerável" teria F1 de 0,667. O teste exato de McNemar não apontou diferença entre os modelos nem entre os prompts (p ajustado = 1,000 nas dez comparações). Todos os números estão em `results/analysis_full.json`.
 
-### Confirmação com a amostra completa
-
-A mesma análise, repetida sobre os 242 pares coletados (484 arquivos por condição), levou à mesma conclusão:
-
-| Modelo | Prompt | Acurácia | Precisão | Recall | F1 | FPR | Pares separados / invertidos |
-|---|---|---|---|---|---|---|---|
-| Gemma 7B | P0 | 0,498 | 0,499 | 0,822 | 0,621 | 0,826 | 8 / 9 |
-| Gemma 7B | P3 | 0,504 | 0,502 | 0,847 | 0,631 | 0,839 | 9 / 7 |
-| CodeGemma 7B | P0 | 0,502 | 0,501 | 0,901 | 0,644 | 0,897 | 2 / 1 |
-| CodeGemma 7B | P3 | 0,500 | 0,500 | 0,955 | 0,656 | 0,955 | 1 / 1 |
-
-O teste de McNemar também não apontou diferença (p ajustado = 1,000 nas quatro comparações). Os números estão em `results/analysis242.json`.
+As versões anteriores do artigo usavam uma subamostra de 60 pares e dois prompts (`results/analysis60.json` e `results/analysis242.json`); a conclusão é a mesma.
 
 ## Estrutura
 
 ```
 ├── data/
-│   ├── sample_manifest.csv        # 242 pares coletados (121 por CWE)
-│   ├── sample60_manifest.csv      # 60 pares analisados no artigo
+│   ├── sample_manifest.csv        # 242 pares analisados no artigo (121 por tipo de falha)
+│   ├── sample60_manifest.csv      # subamostra de 60 pares das versões anteriores
 │   ├── stability_manifest.csv     # pares das execuções repetidas (não usadas no artigo)
 │   ├── dropped_pairs.csv          # pares descartados por não caberem na janela de contexto
 │   └── token_counts_*.csv         # contagem de tokens de cada par
@@ -56,17 +49,10 @@ O conjunto de dados do estudo-base e o SecLLMHolmes **não** estão neste reposi
 Requer Python 3.10 ou superior, sem bibliotecas externas.
 
 ```bash
-git clone --depth 1 https://github.com/Francesco-Sovrano/llms_for_vulnerability_detection_are_lost_in_the_end.git data/sovrano
-python3 scripts/analyze60.py --root .
+python3 scripts/analyze_full.py --root .
 ```
 
-O script sorteia os 60 pares (semente 2026, estratificados por quartil de tamanho, usando só o tamanho dos arquivos), lê `logs/main.jsonl`, calcula as métricas e o teste de McNemar e grava `results/analysis60.json`.
-
-Para a confirmação com os 242 pares coletados (não precisa do conjunto de dados do estudo-base):
-
-```bash
-python3 scripts/analyze242.py --root .
-```
+O script lê `logs/main.jsonl` (e `logs/new_models.jsonl`, se existir), calcula as métricas, o resultado por par e o teste de McNemar para os 242 pares e os quatro prompts, e grava `results/analysis_full.json`. Não precisa do conjunto de dados do estudo-base.
 
 Para a reprodução do estudo-base:
 
@@ -81,7 +67,7 @@ python3 scripts/metrics.py reproduce \
 
 ## Como refazer a coleta
 
-Requer macOS com Ollama. `scripts/setup_mac.sh` baixa os artefatos e os modelos; `scripts/run_pilot.sh` filtra os pares por tamanho e roda o piloto; `scripts/run_main.sh` roda a bateria completa.
+Requer macOS com Ollama. `scripts/setup_mac.sh` baixa os artefatos e os modelos; `scripts/run_pilot.sh` filtra os pares por tamanho e roda o piloto; `scripts/run_main.sh` roda a bateria completa. `scripts/run_new_models.sh` repete a mesma bateria com outros modelos do Ollama (por padrão, `gemma4:12b`) e grava em `logs/new_models.jsonl`.
 
 Configuração usada (registrada em `results/run_metadata.txt`): Ollama 0.40.11; `gemma:7b-instruct` (a72c7f4d0a15) e `codegemma:7b-instruct` (0c96700aaada), quantização Q4_0; temperatura 0, semente 2026, janela de 8.192 tokens; MacBook Pro M4 Pro com 24 GB de memória unificada.
 

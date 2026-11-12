@@ -45,9 +45,11 @@ def build_messages(cfg, cwe, prompt_id, code):
     return msgs
 
 
-def chat(model, messages, num_ctx, seed, timeout=600):
+def chat(model, messages, num_ctx, seed, timeout=900, think=None):
     payload = {"model": model, "messages": messages, "stream": False,
                "options": {"temperature": 0, "seed": seed, "num_ctx": num_ctx}}
+    if think is not None:            # só para modelos com modo de raciocínio (ex.: gemma4)
+        payload["think"] = think
     data = json.dumps(payload).encode("utf-8")
     req = urllib.request.Request(OLLAMA, data=data, headers={"Content-Type": "application/json"})
     t0 = time.time()
@@ -70,6 +72,8 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--limit-per-cwe", type=int, default=0, help="piloto: N pares por CWE (0=todos)")
     ap.add_argument("--repeat-index", type=int, default=1)
+    ap.add_argument("--think", choices=["default", "off", "on"], default="default",
+                    help="modo de raciocínio do Ollama: default = não envia o campo (coleta original)")
     args = ap.parse_args()
 
     cfg = json.load(open(args.config, encoding="utf-8"))
@@ -122,7 +126,8 @@ def main():
                     continue
                 messages = build_messages(cfg, cwe, pid, code)
                 try:
-                    resp, dt = chat(mtag, messages, args.num_ctx, args.seed)
+                    think = {"default": None, "off": False, "on": True}[args.think]
+                    resp, dt = chat(mtag, messages, args.num_ctx, args.seed, think=think)
                     raw = resp.get("message", {}).get("content", "")
                     rec = {
                         "run_id": f"{mtag}|{pid}|{cwe}|{fid}|{ftype}|r{args.repeat_index}",
@@ -140,6 +145,7 @@ def main():
                             resp.get("prompt_eval_count") >= args.num_ctx - 512 or
                             args.num_ctx // 2 <= resp.get("prompt_eval_count") <= args.num_ctx // 2 + 16)),
                         "repeat_index": args.repeat_index,
+                        "think": args.think, "raw_thinking": resp.get("message", {}).get("thinking"),
                         # preenchidos no Fase 5:
                         "parsed_verdict": None, "reported_bug_line": None,
                         "tp": None, "fp": None, "tn": None, "fn": None,
