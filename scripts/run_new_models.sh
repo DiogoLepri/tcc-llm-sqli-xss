@@ -27,7 +27,7 @@ mkdir -p results logs
 
 # 1) completa as 2 inferências que ficaram faltando na coleta original (Gemma 7B, par 378 de CWE-89)
 if [ "$MODE" != "pilot" ] && ollama list | grep -q '^gemma:7b-instruct'; then
-  GD="$(ollama list | awk '$1=="gemma:7b-instruct"{print $3}')"; CD="$(ollama list | awk '$1=="codegemma:7b-instruct"{print $3}')"
+  GD="$(ollama list | awk '$1=="gemma:7b-instruct"{print $2}')"; CD="$(ollama list | awk '$1=="codegemma:7b-instruct"{print $2}')"
   echo "===== completando a coleta original (só o que falta) ====="
   python3 scripts/run_inference.py --config "$CFG" --cwe79 "$CWE79" --cwe89 "$CWE89" \
     --manifest data/sample_manifest.csv --models "gemma:7b-instruct=${GD},codegemma:7b-instruct=${CD}" \
@@ -39,7 +39,7 @@ caffeinate -dimsu -w $$ &
 for M in $MODELS; do
   echo "===== modelo: $M ====="
   ollama pull "$M"
-  D="$(ollama list | awk -v m="$M" '$1==m{print $3}')"
+  D="$(ollama list | awk -v m="$M" '$1==m{print $2}')"
   Q="$(ollama show "$M" 2>/dev/null | grep -i quantization | awk '{print $NF}' | head -1)"
   THINK=default; case "$M" in gemma4*) THINK=off;; esac
   {
