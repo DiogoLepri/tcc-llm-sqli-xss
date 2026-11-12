@@ -26,7 +26,7 @@ mkdir -p results logs
 [ -f "$CWE79" ] || { echo "Faltam os dados do estudo-base em data/sovrano (veja o README)."; exit 1; }
 
 # 1) completa as 2 inferências que ficaram faltando na coleta original (Gemma 7B, par 378 de CWE-89)
-if [ "$MODE" != "pilot" ] && ollama list | grep -q '^gemma:7b-instruct'; then
+if [ "${COMPLETE_ORIGINAL:-0}" = "1" ] && [ "$MODE" != "pilot" ] && ollama list | grep -q '^gemma:7b-instruct'; then
   GD="$(ollama list | awk '$1=="gemma:7b-instruct"{print $2}')"; CD="$(ollama list | awk '$1=="codegemma:7b-instruct"{print $2}')"
   echo "===== completando a coleta original (só o que falta) ====="
   python3 scripts/run_inference.py --config "$CFG" --cwe79 "$CWE79" --cwe89 "$CWE89" \
