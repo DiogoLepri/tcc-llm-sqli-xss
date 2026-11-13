@@ -22,4 +22,4 @@ O veredito e a classificação (VP, FP, VN ou FN) são calculados a partir de `r
 
 Uma interrupção durante a coleta de `main.jsonl` fez 1.091 execuções serem repetidas; a análise usa a primeira ocorrência de cada uma, e todas as repetições tiveram resposta idêntica à primeira.
 
-Em `new_models.jsonl` (Gemma 4, `gemma4:12b`), 1.931 das 1.936 respostas previstas foram registradas. Faltam cinco, todas de versões corrigidas de XSS: arquivo 7625 com P0; arquivo 61 com P2; arquivo 7804 com P1, P2 e P3.
+Em `new_models.jsonl` (Gemma 4, `gemma4:12b`), 1.935 das 1.936 respostas previstas foram registradas. Falta uma: a versão corrigida do arquivo 7804 (XSS) com o P1, em que o modelo não respondeu dentro do tempo limite, em duas tentativas.
