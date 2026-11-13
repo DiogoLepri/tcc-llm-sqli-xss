@@ -6,7 +6,8 @@
   },
   "models": [
     "Gemma 7B",
-    "CodeGemma 7B"
+    "CodeGemma 7B",
+    "Gemma 4 12B"
   ],
   "conditions": {
     "Gemma 7B|P0": {
@@ -104,6 +105,54 @@
       "recall": 0.9545454545454546,
       "f1": 0.65625,
       "fpr": 0.9545454545454546
+    },
+    "Gemma 4 12B|P0": {
+      "n": 483,
+      "TP": 223,
+      "FP": 200,
+      "TN": 41,
+      "FN": 19,
+      "acuracia": 0.546583850931677,
+      "precisao": 0.5271867612293144,
+      "recall": 0.9214876033057852,
+      "f1": 0.6706766917293233,
+      "fpr": 0.8298755186721992
+    },
+    "Gemma 4 12B|P1": {
+      "n": 483,
+      "TP": 201,
+      "FP": 164,
+      "TN": 77,
+      "FN": 41,
+      "acuracia": 0.5755693581780539,
+      "precisao": 0.5506849315068493,
+      "recall": 0.8305785123966942,
+      "f1": 0.6622734761120264,
+      "fpr": 0.6804979253112033
+    },
+    "Gemma 4 12B|P2": {
+      "n": 482,
+      "TP": 206,
+      "FP": 165,
+      "TN": 75,
+      "FN": 36,
+      "acuracia": 0.58298755186722,
+      "precisao": 0.555256064690027,
+      "recall": 0.8512396694214877,
+      "f1": 0.6721044045676998,
+      "fpr": 0.6875
+    },
+    "Gemma 4 12B|P3": {
+      "n": 483,
+      "TP": 210,
+      "FP": 177,
+      "TN": 64,
+      "FN": 32,
+      "acuracia": 0.567287784679089,
+      "precisao": 0.5426356589147286,
+      "recall": 0.8677685950413223,
+      "f1": 0.6677265500794912,
+      "fpr": 0.7344398340248963
     }
   },
   "by_cwe": {
@@ -314,6 +363,110 @@
         "f1": 0.657142857142857,
         "fpr": 0.9421487603305785
       }
+    },
+    "Gemma 4 12B|P0": {
+      "CWE-79": {
+        "n": 241,
+        "TP": 109,
+        "FP": 99,
+        "TN": 21,
+        "FN": 12,
+        "acuracia": 0.5394190871369294,
+        "precisao": 0.5240384615384616,
+        "recall": 0.9008264462809917,
+        "f1": 0.662613981762918,
+        "fpr": 0.825
+      },
+      "CWE-89": {
+        "n": 242,
+        "TP": 114,
+        "FP": 101,
+        "TN": 20,
+        "FN": 7,
+        "acuracia": 0.5537190082644629,
+        "precisao": 0.5302325581395348,
+        "recall": 0.9421487603305785,
+        "f1": 0.6785714285714285,
+        "fpr": 0.8347107438016529
+      }
+    },
+    "Gemma 4 12B|P1": {
+      "CWE-79": {
+        "n": 241,
+        "TP": 92,
+        "FP": 78,
+        "TN": 42,
+        "FN": 29,
+        "acuracia": 0.5560165975103735,
+        "precisao": 0.5411764705882353,
+        "recall": 0.7603305785123967,
+        "f1": 0.6323024054982818,
+        "fpr": 0.65
+      },
+      "CWE-89": {
+        "n": 242,
+        "TP": 109,
+        "FP": 86,
+        "TN": 35,
+        "FN": 12,
+        "acuracia": 0.5950413223140496,
+        "precisao": 0.558974358974359,
+        "recall": 0.9008264462809917,
+        "f1": 0.6898734177215189,
+        "fpr": 0.7107438016528925
+      }
+    },
+    "Gemma 4 12B|P2": {
+      "CWE-79": {
+        "n": 240,
+        "TP": 96,
+        "FP": 77,
+        "TN": 42,
+        "FN": 25,
+        "acuracia": 0.575,
+        "precisao": 0.5549132947976878,
+        "recall": 0.7933884297520661,
+        "f1": 0.6530612244897959,
+        "fpr": 0.6470588235294118
+      },
+      "CWE-89": {
+        "n": 242,
+        "TP": 110,
+        "FP": 88,
+        "TN": 33,
+        "FN": 11,
+        "acuracia": 0.5909090909090909,
+        "precisao": 0.5555555555555556,
+        "recall": 0.9090909090909091,
+        "f1": 0.6896551724137931,
+        "fpr": 0.7272727272727273
+      }
+    },
+    "Gemma 4 12B|P3": {
+      "CWE-79": {
+        "n": 241,
+        "TP": 99,
+        "FP": 87,
+        "TN": 33,
+        "FN": 22,
+        "acuracia": 0.5477178423236515,
+        "precisao": 0.532258064516129,
+        "recall": 0.8181818181818182,
+        "f1": 0.6449511400651465,
+        "fpr": 0.725
+      },
+      "CWE-89": {
+        "n": 242,
+        "TP": 111,
+        "FP": 90,
+        "TN": 31,
+        "FN": 10,
+        "acuracia": 0.5867768595041323,
+        "precisao": 0.5522388059701493,
+        "recall": 0.9173553719008265,
+        "f1": 0.68944099378882,
+        "fpr": 0.743801652892562
+      }
     }
   },
   "pairs_outcome": {
@@ -372,6 +525,34 @@
       "duas_seguras": 10,
       "invertido": 1,
       "pares": 242
+    },
+    "Gemma 4 12B|P0": {
+      "separou": 28,
+      "duas_vulneraveis": 194,
+      "duas_seguras": 13,
+      "invertido": 6,
+      "pares": 241
+    },
+    "Gemma 4 12B|P1": {
+      "separou": 42,
+      "duas_vulneraveis": 158,
+      "duas_seguras": 35,
+      "invertido": 6,
+      "pares": 241
+    },
+    "Gemma 4 12B|P2": {
+      "separou": 46,
+      "duas_vulneraveis": 158,
+      "duas_seguras": 29,
+      "invertido": 7,
+      "pares": 240
+    },
+    "Gemma 4 12B|P3": {
+      "separou": 39,
+      "duas_vulneraveis": 170,
+      "duas_seguras": 25,
+      "invertido": 7,
+      "pares": 241
     }
   },
   "unparsed": {
@@ -382,7 +563,11 @@
     "CodeGemma 7B|P0": 39,
     "CodeGemma 7B|P1": 26,
     "CodeGemma 7B|P2": 21,
-    "CodeGemma 7B|P3": 22
+    "CodeGemma 7B|P3": 22,
+    "Gemma 4 12B|P0": 0,
+    "Gemma 4 12B|P1": 0,
+    "Gemma 4 12B|P2": 0,
+    "Gemma 4 12B|P3": 0
   },
   "explicit_no": {
     "Gemma 7B|P0": 63,
@@ -392,7 +577,11 @@
     "CodeGemma 7B|P0": 10,
     "CodeGemma 7B|P1": 16,
     "CodeGemma 7B|P2": 8,
-    "CodeGemma 7B|P3": 0
+    "CodeGemma 7B|P3": 0,
+    "Gemma 4 12B|P0": 60,
+    "Gemma 4 12B|P1": 118,
+    "Gemma 4 12B|P2": 111,
+    "Gemma 4 12B|P3": 96
   },
   "excl": {
     "Gemma 7B|P0": {
@@ -490,6 +679,54 @@
       "recall": 1.0,
       "f1": 0.6666666666666666,
       "fpr": 1.0
+    },
+    "Gemma 4 12B|P0": {
+      "n": 483,
+      "TP": 223,
+      "FP": 200,
+      "TN": 41,
+      "FN": 19,
+      "acuracia": 0.546583850931677,
+      "precisao": 0.5271867612293144,
+      "recall": 0.9214876033057852,
+      "f1": 0.6706766917293233,
+      "fpr": 0.8298755186721992
+    },
+    "Gemma 4 12B|P1": {
+      "n": 483,
+      "TP": 201,
+      "FP": 164,
+      "TN": 77,
+      "FN": 41,
+      "acuracia": 0.5755693581780539,
+      "precisao": 0.5506849315068493,
+      "recall": 0.8305785123966942,
+      "f1": 0.6622734761120264,
+      "fpr": 0.6804979253112033
+    },
+    "Gemma 4 12B|P2": {
+      "n": 482,
+      "TP": 206,
+      "FP": 165,
+      "TN": 75,
+      "FN": 36,
+      "acuracia": 0.58298755186722,
+      "precisao": 0.555256064690027,
+      "recall": 0.8512396694214877,
+      "f1": 0.6721044045676998,
+      "fpr": 0.6875
+    },
+    "Gemma 4 12B|P3": {
+      "n": 483,
+      "TP": 210,
+      "FP": 177,
+      "TN": 64,
+      "FN": 32,
+      "acuracia": 0.567287784679089,
+      "precisao": 0.5426356589147286,
+      "recall": 0.8677685950413223,
+      "f1": 0.6677265500794912,
+      "fpr": 0.7344398340248963
     }
   },
   "missing": {
@@ -500,7 +737,11 @@
     "CodeGemma 7B|P0": 0,
     "CodeGemma 7B|P1": 0,
     "CodeGemma 7B|P2": 0,
-    "CodeGemma 7B|P3": 0
+    "CodeGemma 7B|P3": 0,
+    "Gemma 4 12B|P0": 1,
+    "Gemma 4 12B|P1": 1,
+    "Gemma 4 12B|P2": 2,
+    "Gemma 4 12B|P3": 1
   },
   "tokens": {
     "Gemma 7B|P0": {
@@ -541,6 +782,26 @@
     "CodeGemma 7B|P3": {
       "max_input": 7615,
       "max_input_plus_output": 7948,
+      "context_overflow": 0
+    },
+    "Gemma 4 12B|P0": {
+      "max_input": 7516,
+      "max_input_plus_output": 7744,
+      "context_overflow": 0
+    },
+    "Gemma 4 12B|P1": {
+      "max_input": 7493,
+      "max_input_plus_output": 7622,
+      "context_overflow": 0
+    },
+    "Gemma 4 12B|P2": {
+      "max_input": 7505,
+      "max_input_plus_output": 7644,
+      "context_overflow": 0
+    },
+    "Gemma 4 12B|P3": {
+      "max_input": 7638,
+      "max_input_plus_output": 7761,
       "context_overflow": 0
     }
   },
@@ -584,6 +845,86 @@
       "p": 0.8974218269914305,
       "p_holm": 1.0,
       "arquivos": 484
+    },
+    {
+      "tipo": "modelo",
+      "A": "Gemma 7B|P0",
+      "B": "Gemma 4 12B|P0",
+      "A_certo_B_errado": 33,
+      "A_errado_B_certo": 56,
+      "p": 0.01918660866014697,
+      "p_holm": 0.2877991299022045,
+      "arquivos": 483
+    },
+    {
+      "tipo": "modelo",
+      "A": "Gemma 7B|P1",
+      "B": "Gemma 4 12B|P1",
+      "A_certo_B_errado": 52,
+      "A_errado_B_certo": 93,
+      "p": 0.0008332149554767807,
+      "p_holm": 0.01649364211806881,
+      "arquivos": 481
+    },
+    {
+      "tipo": "modelo",
+      "A": "Gemma 7B|P2",
+      "B": "Gemma 4 12B|P2",
+      "A_certo_B_errado": 55,
+      "A_errado_B_certo": 97,
+      "p": 0.0008246821059034405,
+      "p_holm": 0.01649364211806881,
+      "arquivos": 482
+    },
+    {
+      "tipo": "modelo",
+      "A": "Gemma 7B|P3",
+      "B": "Gemma 4 12B|P3",
+      "A_certo_B_errado": 52,
+      "A_errado_B_certo": 82,
+      "p": 0.011951543889931044,
+      "p_holm": 0.1912247022388967,
+      "arquivos": 483
+    },
+    {
+      "tipo": "modelo",
+      "A": "CodeGemma 7B|P0",
+      "B": "Gemma 4 12B|P0",
+      "A_certo_B_errado": 37,
+      "A_errado_B_certo": 58,
+      "p": 0.03960823767054589,
+      "p_holm": 0.5545153273876424,
+      "arquivos": 483
+    },
+    {
+      "tipo": "modelo",
+      "A": "CodeGemma 7B|P1",
+      "B": "Gemma 4 12B|P1",
+      "A_certo_B_errado": 49,
+      "A_errado_B_certo": 87,
+      "p": 0.0014186377419933976,
+      "p_holm": 0.025535479355881158,
+      "arquivos": 483
+    },
+    {
+      "tipo": "modelo",
+      "A": "CodeGemma 7B|P2",
+      "B": "Gemma 4 12B|P2",
+      "A_certo_B_errado": 41,
+      "A_errado_B_certo": 81,
+      "p": 0.00037138949109718247,
+      "p_holm": 0.007799179313040832,
+      "arquivos": 482
+    },
+    {
+      "tipo": "modelo",
+      "A": "CodeGemma 7B|P3",
+      "B": "Gemma 4 12B|P3",
+      "A_certo_B_errado": 41,
+      "A_errado_B_certo": 73,
+      "p": 0.0035046837846087926,
+      "p_holm": 0.05957962433834947,
+      "arquivos": 483
     },
     {
       "tipo": "prompt",
@@ -644,6 +985,36 @@
       "p": 1.0,
       "p_holm": 1.0,
       "arquivos": 484
+    },
+    {
+      "tipo": "prompt",
+      "A": "Gemma 4 12B|P0",
+      "B": "Gemma 4 12B|P1",
+      "A_certo_B_errado": 23,
+      "A_errado_B_certo": 37,
+      "p": 0.09246098107292373,
+      "p_holm": 1.0,
+      "arquivos": 482
+    },
+    {
+      "tipo": "prompt",
+      "A": "Gemma 4 12B|P0",
+      "B": "Gemma 4 12B|P2",
+      "A_certo_B_errado": 22,
+      "A_errado_B_certo": 39,
+      "p": 0.03961701489849968,
+      "p_holm": 0.5545153273876424,
+      "arquivos": 481
+    },
+    {
+      "tipo": "prompt",
+      "A": "Gemma 4 12B|P0",
+      "B": "Gemma 4 12B|P3",
+      "A_certo_B_errado": 19,
+      "A_errado_B_certo": 29,
+      "p": 0.19341265286193732,
+      "p_holm": 1.0,
+      "arquivos": 482
     }
   ]
 }

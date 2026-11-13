@@ -82,3 +82,14 @@ Configuração usada (registrada em `results/run_metadata.txt`): Ollama 0.40.11;
 
 - SOVRANO, F.; BAUER, A.; BACCHELLI, A. Large language models for in-file vulnerability localization can be "lost in the end". *Proceedings of the ACM on Software Engineering*, v. 2, n. FSE, 2025. DOI: 10.1145/3715758. Artefato: DOI 10.5281/zenodo.14840519.
 - ULLAH, S. et al. LLMs cannot reliably identify and reason about security vulnerabilities (yet?). *IEEE Symposium on Security and Privacy*, 2024. DOI: 10.1109/SP54263.2024.00210.
+
+## Análise complementar: Gemma 4 (`gemma4:12b`)
+
+Mesmos 484 arquivos e quatro prompts; quantização nvfp4, Ollama 0.40.15, janela de 16.384 tokens, modo de raciocínio desligado. 1.931 das 1.936 respostas previstas foram registradas (ver `docs/formato_dos_registros.md`).
+
+| Condição | VP | FN | FP | VN | Acurácia | Precisão | Recall | F1 | Taxa de FP | Pares certos |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Gemma 4 12B · P0 | 223 | 19 | 200 | 41 | 0,547 | 0,527 | 0,921 | 0,671 | 0,830 | 28 de 241 |
+| Gemma 4 12B · P1 | 201 | 41 | 164 | 77 | 0,576 | 0,551 | 0,831 | 0,662 | 0,680 | 42 de 241 |
+| Gemma 4 12B · P2 | 206 | 36 | 165 | 75 | 0,583 | 0,555 | 0,851 | 0,672 | 0,688 | 46 de 240 |
+| Gemma 4 12B · P3 | 210 | 32 | 177 | 64 | 0,567 | 0,543 | 0,868 | 0,668 | 0,734 | 39 de 241 |
